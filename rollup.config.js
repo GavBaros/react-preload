@@ -3,15 +3,16 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 
 export const globals = {
-  'react-router-preload': 'reactRouterPreload.core',
+  'react-preload-apollo': 'reactPreload.apollo',
+  'react-preload-core': 'reactPreload.core',
+  'react-preload-universal-component': 'reactPreload.universalComponent',
+  'react-router-preload-core': 'reactRouterPreload.core',
   'react-router-preload-tree': 'reactRouterPreload.tree',
-  'react-router-preload-apollo': 'reactRouterPreload.treeApollo',
-  'react-router-preload-component': 'reactRouterPreload.treeUniversalComponent',
 };
 
 export default (name, pkg) => [
   {
-    name: `reactRouterPreload.${name}`,
+    name: name,
     input: 'src/index.js',
     output: [
       { file: pkg.main, format: 'cjs' },
