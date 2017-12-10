@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "precommit": "lint-staged",
+    "bootstrap": "yarn install && lerna bootstrap",
+    "postbootstrap": "yarn run build",
+    "build": "lerna run -- build",
+    "test": "lerna run -- test",
+    "format":
+      "prettier --trailing-comma all --single-quote --write \"packages/*/src/**/*.js\"",
+    "predeploy": "yarn run build",
+    "deploy": "lerna publish -m \"chore: Publish\" --independent"
+  },
+  "lint-staged": {
+    "*.js*": [
+      "prettier --trailing-comma all --single-quote --write",
+      "git add"
+    ],
+    "*.json*": ["prettier --write", "git add"]
+  },
+  "devDependencies": {
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "husky": "^0.14.3",
+    "lerna": "^2.5.1",
+    "lint-staged": "^6.0.0",
+    "prettier": "^1.9.1"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "name": "react-preload-apollo",
+  "version": "0.0.0",
+  "description":
+    "Allows you to preload apollo components before rendering them.",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.esm.js",
+  "scripts": {
+    "clean": "rimraf lib && rimraf coverage",
+    "prebuild": "yarn run clean",
+    "build": "rollup -c",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "flow": "flow",
+    "prepublish": "yarn run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fubhy/react-preload.git"
+  },
+  "keywords": [
+    "react",
+    "preload",
+    "async",
+    "asynchronous",
+    "prefetch",
+    "apollo"
+  ],
+  "files": ["lib"],
+  "author": "Sebastian Siemssen <fubhy@fubhy.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fubhy/react-preload/issues"
+  },
+  "homepage": "https://github.com/fubhy/react-preload",
+  "devDependencies": {
+    "flow-bin": "^0.61.0",
+    "jest": "^21.2.1",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.52.1",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  }
+}
