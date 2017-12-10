@@ -10,7 +10,7 @@ export const PreloaderPropType = PropTypes.shape({
 
 export default class Preloader extends Component {
   static childContextTypes = {
-    preloader: PreloaderPropType.isRequired,
+    preloader: PreloaderPropType,
   };
 
   state = {

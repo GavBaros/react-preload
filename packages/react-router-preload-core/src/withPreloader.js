@@ -3,20 +3,22 @@
 import React, { Component } from 'react';
 import { PreloaderPropType } from './index';
 
-export default function withPreloader(BaseComponent) {
-  const displayName = BaseComponent.displayName;
+const noop = () => {};
 
+export default function withPreloader(BaseComponent) {
   return class WithPreloader extends Component {
-    static displayName = `${BaseComponent.displayName}WithPreloader`;
+    displayName = `${BaseComponent.displayName}WithPreloader`;
 
     static contextTypes = {
-      preloader: PreloaderPropType.isRequired,
+      preloader: PreloaderPropType,
     };
 
     render() {
       return (
         <BaseComponent
-          preload={this.context.preloader.preload}
+          preload={
+            (this.context.preloader && this.context.preloader.preload) || noop
+          }
           {...this.props}
         />
       );

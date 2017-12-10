@@ -4,6 +4,7 @@ import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { PreloaderPropType } from './preloaderContext';
 
 export default function createLink(preloadCb: Function) {
   function createPreloader(linkProps: Object) {
@@ -44,10 +45,7 @@ export default function createLink(preloadCb: Function) {
 
   return class AsyncLink extends Link {
     static contextTypes = {
-      preloader: PropTypes.shape({
-        preload: PropTypes.func.isRequired,
-        loading: PropTypes.bool.isRequired,
-      }),
+      preloader: PreloaderPropType,
       router: PropTypes.shape({
         history: PropTypes.shape({
           push: PropTypes.func.isRequired,
