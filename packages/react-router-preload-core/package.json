@@ -1,6 +1,6 @@
 {
   "name": "react-router-preload-core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Allows you to preload routes before transitioning.",
   "main": "lib/index.cjs.js",
   "module": "lib/index.esm.js",

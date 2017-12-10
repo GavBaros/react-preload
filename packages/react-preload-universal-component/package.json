@@ -1,6 +1,6 @@
 {
   "name": "react-preload-universal-component",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description":
     "Allows you to preload universal components before rendering them.",
   "main": "lib/index.cjs.js",
