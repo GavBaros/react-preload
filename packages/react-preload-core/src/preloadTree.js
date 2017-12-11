@@ -8,7 +8,7 @@ export type PreloadVisitorFn = (
   context: Object,
 ) => ?Promise<any>;
 
-export default function preloadTree(
+export function preloadTree(
   rootElement: React$Element<any>,
   rootContext: Object = {},
   visitRoot: boolean = true,

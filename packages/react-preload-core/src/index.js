@@ -1,3 +1,3 @@
 // @flow
 
-export { default as preloadTree } from './preloadTree';
+export { preloadTree } from './preloadTree';

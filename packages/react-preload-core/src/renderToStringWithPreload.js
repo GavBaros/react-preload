@@ -1,9 +1,9 @@
 // @flow
 
 import { renderToString } from 'react-dom/server';
-import preloadTree from './preloadTree';
+import { preloadTree } from './preloadTree';
 
-export default function renderToStringWithPreload(
+export function renderToStringWithPreload(
   rootComponent: React$Element<any>,
   preloadFns: Array<Function> = [],
 ): Promise<string> {

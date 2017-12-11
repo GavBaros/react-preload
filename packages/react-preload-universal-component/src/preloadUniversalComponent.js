@@ -1,6 +1,6 @@
 // @flow
 
-export default function preloadUniversalComponents(element, instance, context) {
+export function preloadUniversalComponent(element, instance, context) {
   // Check if the current component is a lazy component wrapper.
   if (element && element.type && typeof element.type.preload === 'function') {
     // Preload the component file.

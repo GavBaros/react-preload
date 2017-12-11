@@ -1,3 +1,3 @@
 // @flow
 
-export { default as createLink } from './createLink';
+export { createLink } from './createLink';

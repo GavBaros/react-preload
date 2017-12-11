@@ -1,5 +1,3 @@
 // @flow
 
-export {
-  default as renderToStringWithPreload,
-} from './renderToStringWithPreload';
+export { renderToStringWithPreload } from './renderToStringWithPreload';

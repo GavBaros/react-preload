@@ -1,17 +1,17 @@
 // @flow
 
 import React from 'react';
-import { StaticRouter } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { createLocation } from 'history';
+import { Link, StaticRouter } from 'react-router-dom';
 import { PreloaderPropType } from './preloaderContext';
 
-export default function createLink(preloadCb: Function) {
-  function createPreloader(linkProps: Object) {
-    return async function doPreload(
-      targetHref: string,
-      containerProps: Object,
-    ) {
+function isModifiedEvent(event) {
+  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+}
+
+export function createLink(preloadCb: Function) {
+  function createPreloader(targetHref: string, linkProps: Object) {
+    return async function doPreload(containerProps: Object) {
       const routerContext = {};
       const rootElement = (
         <StaticRouter location={targetHref} context={routerContext}>
@@ -19,21 +19,7 @@ export default function createLink(preloadCb: Function) {
         </StaticRouter>
       );
 
-      // Mock the preloader context.
-      const rootContext = {
-        preloader: {
-          preload: () => Promise.resolve(),
-          loading: true,
-        },
-      };
-
-      await preloadCb(
-        rootElement,
-        rootContext,
-        linkProps,
-        containerProps,
-        targetHref,
-      );
+      await preloadCb(rootElement, targetHref, linkProps, containerProps);
 
       // If the app was redirected during preloading, we need to
       // also preload the next route.
@@ -45,39 +31,46 @@ export default function createLink(preloadCb: Function) {
 
   return class AsyncLink extends Link {
     static contextTypes = {
+      ...Link.contextTypes,
       preloader: PreloaderPropType,
-      router: PropTypes.shape({
-        history: PropTypes.shape({
-          push: PropTypes.func.isRequired,
-          replace: PropTypes.func.isRequired,
-          createHref: PropTypes.func.isRequired,
-        }).isRequired,
-        route: PropTypes.object,
-      }).isRequired,
     };
 
-    handleClickOriginal = this.handleClick;
+    handleClick = async event => {
+      if (this.props.onClick) {
+        this.props.onClick(event);
+      }
 
-    handleClick = event => {
-      event.preventDefault();
-      event.persist();
+      // Let browser handle target blank etc.
+      if (this.props.target) {
+        return;
+      }
 
-      // eslint-disable-next-line no-param-reassign
-      event.defaultPrevented = false;
+      // Ignore if custom click handler prevented the default behavior or this was
+      // not a plain left click (without any modifiers).
+      if (
+        !event.defaultPrevented &&
+        event.button === 0 &&
+        !isModifiedEvent(event)
+      ) {
+        event.preventDefault();
 
-      const { to } = this.props;
-      const { router, preloader } = this.context;
+        const { replace, to } = this.props;
+        const { router: { history }, preloader: { preload } } = this.context;
+        const location =
+          typeof to === 'string'
+            ? createLocation(to, null, null, history.location)
+            : to;
+        const href = history.createHref(location);
+        const preloader = createPreloader(href, this.props);
 
-      const args = typeof to === 'string' ? { pathname: to } : to;
-      const href = router.history.createHref(args);
-      const preload = createPreloader(this.props);
+        await preload(preloader);
 
-      preloader
-        .preload(href, preload)
-        .then(
-          () => this.handleClickOriginal(event),
-          () => this.handleClickOriginal(event),
-        );
+        if (replace) {
+          history.replace(to);
+        } else {
+          history.push(to);
+        }
+      }
     };
   };
 }

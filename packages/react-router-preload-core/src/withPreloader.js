@@ -5,7 +5,7 @@ import { PreloaderPropType } from './index';
 
 const noop = () => {};
 
-export default function withPreloader(BaseComponent) {
+export function withPreloader(BaseComponent) {
   return class WithPreloader extends Component {
     displayName = `${BaseComponent.displayName}WithPreloader`;
 
@@ -14,11 +14,11 @@ export default function withPreloader(BaseComponent) {
     };
 
     render() {
+      const { preloader } = this.context;
+
       return (
         <BaseComponent
-          preload={
-            (this.context.preloader && this.context.preloader.preload) || noop
-          }
+          preload={(preloader && preloader.preload) || noop}
           {...this.props}
         />
       );

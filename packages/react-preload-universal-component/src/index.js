@@ -1,5 +1,3 @@
 // @flow
 
-export {
-  default as preloadUniversalComponent,
-} from './preloadUniversalComponent';
+export { preloadUniversalComponent } from './preloadUniversalComponent';

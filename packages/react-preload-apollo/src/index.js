@@ -1,3 +1,3 @@
 // @flow
 
-export { default as preloadApollo } from './preloadApollo';
+export { preloadApollo } from './preloadApollo';
