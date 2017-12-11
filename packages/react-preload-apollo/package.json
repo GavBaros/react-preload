@@ -1,6 +1,6 @@
 {
   "name": "react-preload-apollo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description":
     "Allows you to preload apollo components before rendering them.",
   "main": "lib/index.cjs.js",
