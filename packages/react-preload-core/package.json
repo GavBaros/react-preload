@@ -8,7 +8,7 @@
   "scripts": {
     "clean": "rimraf lib && rimraf coverage",
     "prebuild": "yarn run clean",
-    "build": "rollup -c",
+    "build": "NODE_ENV=production rollup -c",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
@@ -28,8 +28,14 @@
   },
   "homepage": "https://github.com/fubhy/react-preload",
   "devDependencies": {
+    "babel-jest": "^22.0.3",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "flow-bin": "^0.61.0",
-    "jest": "^21.2.1",
+    "jest": "^22.0.3",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-tree-walker": "^2.1.3",
     "rimraf": "^2.6.2",
     "rollup": "^0.52.1",
     "rollup-plugin-babel": "^3.0.2",
@@ -40,5 +46,8 @@
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-tree-walker": "^2.1.3"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/jest.setup.js"
   }
 }

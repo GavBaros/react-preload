@@ -1,3 +1,4 @@
 // @flow
 
-export { preloadTree } from './preloadTree';
+export * from './walkTreeAndPreload';
+export * from './withPreloading';
