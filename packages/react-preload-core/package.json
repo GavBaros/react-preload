@@ -1,6 +1,6 @@
 {
   "name": "react-preload-core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description":
     "Allows you to preload react components before rendering them.",
   "main": "dist/index.cjs.js",

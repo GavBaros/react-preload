@@ -1,6 +1,6 @@
 {
   "name": "react-preload-universal-component",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Allows you to preload universal components.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -37,7 +37,7 @@
     "jest": "^22.0.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-preload-core": "^1.0.0",
+    "react-preload-core": "^1.0.1",
     "react-universal-component": "^2.8.1",
     "rimraf": "^2.6.2",
     "rollup": "^0.52.1",
