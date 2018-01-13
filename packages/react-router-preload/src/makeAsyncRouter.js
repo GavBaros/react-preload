@@ -35,18 +35,13 @@ export const makeAsyncRouter = (
     state = {
       match: this.context.router.route.match,
       location: this.context.router.history.location,
-    };
-
-    preload = location => {
-      const href = this.context.router.history.createHref(location);
-      return preloadRoute(href, this.props.children);
+      next: undefined,
     };
 
     getChildContext() {
       return {
         router: {
           ...this.context.router,
-          preload: this.preload,
           route: {
             ...this.context.router.route,
             location: this.state.location,
@@ -61,14 +56,36 @@ export const makeAsyncRouter = (
       const nextMatch = nextContext.router.route.match;
       const currentLocation = this.state.location;
 
-      if (nextLocation !== currentLocation) {
-        this.preload(nextLocation).then(() => {
-          this.setState({
+      // Check if we are already on the target route.
+      if (nextLocation === currentLocation) {
+        return;
+      }
+
+      // Check if we are already loading the target route.
+      if (nextLocation !== this.state.next) {
+        return;
+      }
+
+      // Store the target location to prevent subsequent / queued up route
+      // changes from causing hick-ups when triggering location changes
+      // quickly.
+      this.setState({ next: nextLocation });
+
+      // Load the target route in the background. Delay the transition
+      // until the promise has been resolved.
+      preloadRoute(nextLocation, nextProps.children).then(() => {
+        this.setState(prevState => {
+          if (nextLocation !== prevState.next) {
+            return null;
+          }
+
+          return {
             location: nextLocation,
             match: nextMatch,
-          });
+            next: undefined,
+          };
         });
-      }
+      });
     }
 
     render() {

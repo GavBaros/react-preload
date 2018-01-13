@@ -7,13 +7,13 @@ import { walkTreeAndPreload } from 'react-preload-core';
 const Wrapper = ({ children }) => children;
 
 export function preloadRoute(
-  href: string,
+  location: Object | string,
   component: React$Element<any>,
   options: ?Object,
 ) {
   const context = {};
   const element = (
-    <StaticRouter location={href} context={context}>
+    <StaticRouter location={location} context={context}>
       <Wrapper>{component}</Wrapper>
     </StaticRouter>
   );
