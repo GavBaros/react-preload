@@ -2,17 +2,15 @@
   "name": "react-router-preload",
   "version": "0.0.4",
   "description": "Allows you to preload routes before transitioning.",
-  "main": "lib/index.cjs.js",
-  "module": "lib/index.esm.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
   "scripts": {
-    "clean": "rimraf lib && rimraf coverage",
-    "prebuild": "yarn run clean",
-    "build": "NODE_ENV=production rollup -c",
+    "clean": "rimraf dist && rimraf coverage",
+    "build": "rimraf dist && NODE_ENV=production rollup -c",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "flow": "flow",
-    "prepublish": "yarn run build"
+    "flow": "flow"
   },
   "repository": {
     "type": "git",
@@ -28,7 +26,7 @@
     "react-router",
     "transition"
   ],
-  "files": ["lib"],
+  "files": ["dist"],
   "author": "Sebastian Siemssen <fubhy@fubhy.com>",
   "license": "MIT",
   "bugs": {
@@ -40,6 +38,11 @@
   },
   "devDependencies": {
     "babel-jest": "^22.0.3",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",
     "flow-bin": "^0.61.0",

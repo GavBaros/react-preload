@@ -1,4 +1,3 @@
 // @flow
 
-export * from './PreloadContainer';
-export * from './withRoutePreloading';
+export * from './makeAsyncRouter';

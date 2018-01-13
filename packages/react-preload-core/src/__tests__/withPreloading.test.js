@@ -1,11 +1,11 @@
 import React from 'react';
-import { withPreload } from '../withPreload';
+import { withPreloading } from '../withPreloading';
 import { walkTreeAndPreload } from '../walkTreeAndPreload';
 
 describe('higher-order component', () => {
   it('works for class components', async () => {
     const fetchDataMock = jest.fn(() => Promise.resolve(true));
-    const ComponentWithPreload = withPreload(
+    const ComponentWithPreload = withPreloading(
       (element, instance, context, options) => {
         return instance.fetchData();
       },
@@ -25,7 +25,7 @@ describe('higher-order component', () => {
 
   it('works for functional stateless components', async () => {
     const mockedCallback = jest.fn(() => Promise.resolve(true));
-    const ComponentWithPreload = withPreload(mockedCallback)(() => null);
+    const ComponentWithPreload = withPreloading(mockedCallback)(() => null);
 
     await walkTreeAndPreload(<ComponentWithPreload />);
     expect(mockedCallback).toHaveBeenCalled();

@@ -1,8 +1,7 @@
 {
-  "name": "react-preload-core",
-  "version": "0.0.5",
-  "description":
-    "Allows you to preload react components before rendering them.",
+  "name": "react-preload-apollo",
+  "version": "0.0.1",
+  "description": "Allows you to preload apollo graphql query components.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "scripts": {
@@ -17,7 +16,7 @@
     "type": "git",
     "url": "https://github.com/fubhy/react-preload.git"
   },
-  "keywords": ["react", "preload", "async", "asynchronous", "prefetch"],
+  "keywords": ["react", "preload", "apollo", "graphql"],
   "files": ["dist"],
   "author": "Sebastian Siemssen <fubhy@fubhy.com>",
   "license": "MIT",
@@ -36,10 +35,10 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "flow-bin": "^0.61.0",
     "jest": "^22.0.3",
-    "prop-types": "^15.6.0",
     "react": "^16.2.0",
+    "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
-    "react-tree-walker": "^2.1.3",
+    "react-preload-core": "^0.0.5",
     "rimraf": "^2.6.2",
     "rollup": "^0.52.1",
     "rollup-plugin-babel": "^3.0.2",
@@ -47,10 +46,7 @@
     "rollup-plugin-node-resolve": "^3.0.0"
   },
   "peerDependencies": {
-    "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-tree-walker": "^2.1.3"
+    "react-apollo": "^2.0.4"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/jest.setup.js"

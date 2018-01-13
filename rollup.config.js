@@ -2,13 +2,12 @@ import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 
-export const globals = {
-  'react-preload-apollo': 'reactPreload.apollo',
-  'react-preload-core': 'reactPreload.core',
-  'react-preload-universal-component': 'reactPreload.universalComponent',
-  'react-router-preload-core': 'reactRouterPreload.core',
-  'react-router-preload-tree': 'reactRouterPreload.tree',
-};
+export const externals = [
+  'react-preload-core',
+  'react-preload-apollo',
+  'react-preload-universal-component',
+  'react-router-preload',
+];
 
 export default (name, pkg) => [
   {
@@ -19,8 +18,7 @@ export default (name, pkg) => [
       { file: pkg.module, format: 'es' },
     ],
     exports: 'named',
-    external: Object.keys(globals),
-    globals: globals,
+    external: externals.concat(Object.keys(pkg.peerDependencies || {})),
     plugins: [
       babel({
         exclude: ['node_modules/**'],

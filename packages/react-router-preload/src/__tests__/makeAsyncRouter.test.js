@@ -1,30 +1,29 @@
-import React from 'react';
-import { Link as LinkBase } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import { MemoryRouter, Route, Switch } from 'react-router';
 import { withPreloading } from 'react-preload-core';
-import { withRoutePreloading } from '../withRoutePreloading';
-import { PreloadContainer } from '../PreloadContainer';
+import { makeAsyncRouter } from '../makeAsyncRouter';
 
-describe('link with preloading', () => {
-  it('delays the route transition until preloading has finished', async () => {
+describe('when using the async router', () => {
+  it('route transitions are delayed until after preloading is done', async () => {
     const asyncPagePromise = Promise.resolve(true);
     const asyncPagePreloadMock = jest.fn(() => asyncPagePromise);
 
-    const Link = withRoutePreloading()(LinkBase);
+    const AsyncRouter = makeAsyncRouter(MemoryRouter);
     const SyncPage = () => 'Sync Page';
     const AsyncPage = withPreloading(asyncPagePreloadMock)(() => 'Async Page');
 
     const component = mount(
-      <MemoryRouter initialEntries={['/foo']}>
-        <PreloadContainer>
+      <AsyncRouter initialEntries={['/foo']}>
+        <Fragment>
           <Switch>
             <Route path="/foo" exact={true} component={SyncPage} />
             <Route path="/bar" exact={true} component={AsyncPage} />
           </Switch>
 
           <Link to="/bar">Go to "Bar"</Link>
-        </PreloadContainer>
-      </MemoryRouter>,
+        </Fragment>
+      </AsyncRouter>,
     );
 
     // Before and right after clicking the link, the current page should
