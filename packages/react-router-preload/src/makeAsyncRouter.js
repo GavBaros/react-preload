@@ -62,7 +62,7 @@ export const makeAsyncRouter = (
       }
 
       // Check if we are already loading the target route.
-      if (nextLocation !== this.state.next) {
+      if (nextLocation === this.state.next) {
         return;
       }
 
