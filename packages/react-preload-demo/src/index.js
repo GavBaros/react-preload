@@ -6,7 +6,7 @@ import './styles.scss';
 import ReactDOM from 'react-dom';
 import React, { Fragment } from 'react';
 import { Switch, Route } from 'react-router';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { HashRouter, Link } from 'react-router-dom';
 import { makeAsyncRouter } from 'react-router-preload';
 import { withPreloading } from 'react-preload-core';
 
@@ -24,10 +24,10 @@ const AsyncPageVerySlow = withPreloading(() => {
   });
 })(() => 'Async very slow');
 
-const AsyncRouter = makeAsyncRouter(BrowserRouter);
+const AsyncRouter = makeAsyncRouter(HashRouter);
 
 const App = () => (
-  <AsyncRouter>
+  <AsyncRouter basename="/react-preload">
     <Fragment>
       <Link to="/">Home</Link>
       <Link to="/sync">Sync</Link>
