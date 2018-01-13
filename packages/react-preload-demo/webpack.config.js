@@ -8,7 +8,12 @@ const root = path.resolve(process.cwd(), '..', '..');
 const env = process.env.NODE_ENV || 'development';
 
 // Target the source code of sibling packages.
-const alias = ['react-preload-core'].reduce((carry, current) => {
+const alias = [
+  'react-preload-core',
+  'react-preload-apollo',
+  'react-preload-universal-component',
+  'react-router-preload',
+].reduce((carry, current) => {
   const package = path.join(root, 'packages', current, 'src', 'index');
 
   return {
