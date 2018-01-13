@@ -1,6 +1,6 @@
 {
   "name": "react-router-preload",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "Allows you to preload routes before transitioning.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/fubhy/react-preload",
   "dependencies": {
-    "react-preload-core": "^0.0.5"
+    "react-preload-core": "^1.0.0"
   },
   "devDependencies": {
     "babel-jest": "^22.0.3",
