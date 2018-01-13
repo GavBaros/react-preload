@@ -27,7 +27,7 @@ const AsyncPageVerySlow = withPreloading(() => {
 const AsyncRouter = makeAsyncRouter(HashRouter);
 
 const App = () => (
-  <AsyncRouter basename="/react-preload">
+  <AsyncRouter>
     <Fragment>
       <Link to="/">Home</Link>
       <Link to="/sync">Sync</Link>
