@@ -4,8 +4,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { preloadRoute } from './preloadRoute';
 
-export const makeAsyncRouter = BaseComponent => {
-  class AsyncRouter extends React.Component<any> {
+type AsyncRouterState = {
+  match: Object,
+  location: Object,
+};
+
+type AsyncRouterProps = {
+  children: React$Element<any>,
+};
+
+export const makeAsyncRouter = (
+  BaseComponent: React$ComponentType<AsyncRouterProps>,
+) => {
+  class AsyncRouter extends React.Component<
+    AsyncRouterProps,
+    AsyncRouterState,
+  > {
     static contextTypes = {
       router: PropTypes.shape({
         history: PropTypes.object.isRequired,
@@ -62,7 +76,7 @@ export const makeAsyncRouter = BaseComponent => {
     }
   }
 
-  return ({ children, ...props }) => (
+  return ({ children, ...props }: AsyncRouterProps) => (
     <BaseComponent {...props}>
       <AsyncRouter>{children}</AsyncRouter>
     </BaseComponent>
