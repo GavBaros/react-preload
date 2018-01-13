@@ -5841,6 +5841,10 @@ react-dom@^16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
+react-preload-core@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-preload-core/-/react-preload-core-1.0.0.tgz#105b81dbaa46fc696c0250ebd7321b57edb0457f"
+
 react-reconciler@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.7.0.tgz#9614894103e5f138deeeb5eabaf3ee80eb1d026d"
