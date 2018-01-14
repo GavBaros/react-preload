@@ -93,7 +93,8 @@ This package comes with pre-defined decorators for common use-cases such as for
 react-apollo. You can therefore simplify the previous by installing the contained ``react-preload-apollo`` utility.
 
 ```js
-import { graphql } from 'react-preload-apollo';
+import { graphql } from 'react-apollo';
+import { withPreloading } from 'react-preload-apollo';
 
 const MyComponent = (props) => (
   // ...
@@ -105,7 +106,7 @@ const withData = graphql(gql`
   }
 `);
 
-export default withData(MyComponent);
+export default withPreloading(withData(MyComponent));
 ```
 
 I am going to add more decorators for common scenarios in the future.
