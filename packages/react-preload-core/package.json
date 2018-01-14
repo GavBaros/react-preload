@@ -3,8 +3,9 @@
   "version": "1.0.2",
   "description":
     "Allows you to preload react components before rendering them.",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
   "scripts": {
     "clean": "rimraf lib && rimraf es && rimraf dist && rimraf coverage",
     "prebuild": "yarn run clean",

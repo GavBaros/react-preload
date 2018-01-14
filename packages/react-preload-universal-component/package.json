@@ -2,8 +2,9 @@
   "name": "react-preload-universal-component",
   "version": "1.0.3",
   "description": "Allows you to preload universal components.",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
   "scripts": {
     "clean": "rimraf lib && rimraf es && rimraf dist && rimraf coverage",
     "prebuild": "yarn run clean",
