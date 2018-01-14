@@ -1,30 +1,36 @@
 import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+import replace from 'rollup-plugin-replace';
+import uglify from 'rollup-plugin-uglify';
 
-export const externals = [
-  'react-preload-core',
-  'react-preload-apollo',
-  'react-preload-universal-component',
-  'react-router-preload',
-];
+const env = process.env.NODE_ENV || 'development';
 
-export default (name, pkg) => [
-  {
+export default (name, file, globals = {}) => {
+  const config = {
     name: name,
     input: 'src/index.js',
-    output: [
-      { file: pkg.main, format: 'cjs' },
-      { file: pkg.module, format: 'es' },
-    ],
+    output: [{ file: `${file}.min.js`, format: 'umd' }],
+    globals: globals,
     exports: 'named',
-    external: externals.concat(Object.keys(pkg.peerDependencies || {})),
+    external: Object.keys(globals),
     plugins: [
       babel({
         exclude: ['node_modules/**'],
       }),
       resolve(),
-      commonjs(),
+      replace({
+        'process.env.NODE_ENV': JSON.stringify(env),
+      }),
+      commonjs({
+        include: /node_modules/,
+      }),
     ],
-  },
-];
+  };
+
+  if (env === 'production') {
+    config.plugins.push(uglify());
+  }
+
+  return config;
+};

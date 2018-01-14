@@ -3,4 +3,6 @@ lerna-debug.log
 yarn-error.log
 
 packages/*/dist
+packages/*/lib
+packages/*/es
 packages/*/coverage

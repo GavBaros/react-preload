@@ -1,4 +1,7 @@
 import build from '../../rollup.config';
-import pkg from './package.json';
 
-export default build('reactPreload.core', pkg);
+export default build('ReactPreloadCore', 'react-preload-core', {
+  react: 'React',
+  'react-dom': 'ReactDOM',
+  'prop-types': 'PropTypes',
+});

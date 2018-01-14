@@ -5,8 +5,16 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "scripts": {
-    "clean": "rimraf dist && rimraf coverage",
-    "build": "rimraf dist && NODE_ENV=production rollup -c",
+    "clean": "rimraf lib && rimraf es && rimraf dist && rimraf coverage",
+    "prebuild": "yarn run clean",
+    "build:commonjs": "BABEL_ENV=commonjs babel src --out-dir lib",
+    "build:es": "BABEL_ENV=es babel src --out-dir es",
+    "build:umd":
+      "BABEL_ENV=umd NODE_ENV=development rollup -c -o dist/react-router-preload.js",
+    "build:umd:min":
+      "BABEL_ENV=umd NODE_ENV=production rollup -c -o dist/react-router-preload.min.js",
+    "build":
+      "yarn run build:commonjs && yarn run build:es && yarn run build:umd && yarn run build:umd:min",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
@@ -17,7 +25,7 @@
     "url": "https://github.com/fubhy/react-preload.git"
   },
   "keywords": ["react", "preload", "apollo", "graphql"],
-  "files": ["dist"],
+  "files": ["dist", "lib", "es"],
   "author": "Sebastian Siemssen <fubhy@fubhy.com>",
   "license": "MIT",
   "bugs": {
@@ -25,6 +33,7 @@
   },
   "homepage": "https://github.com/fubhy/react-preload",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-jest": "^22.0.3",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
@@ -36,6 +45,7 @@
     "flow-bin": "^0.61.0",
     "jest": "^22.0.3",
     "react": "^16.2.0",
+    "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
     "react-preload-core": "^1.0.1",
     "rimraf": "^2.6.2",
@@ -46,5 +56,12 @@
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/jest.setup.js"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-imports": "^1.4.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-uglify": "^2.0.1"
   }
 }

@@ -1,4 +1,10 @@
 import build from '../../rollup.config';
-import pkg from './package.json';
 
-export default build('reactPreload.router', pkg);
+export default build('ReactRouterPreload', 'react-router-preload', {
+  react: 'React',
+  'react-dom': 'ReactDOM',
+  'prop-types': 'PropTypes',
+  'react-router-dom': 'ReactRouterDOM',
+  history: 'History',
+  'react-preload-core': 'ReactPreloadCore',
+});
