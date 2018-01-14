@@ -84,9 +84,6 @@ module.exports = {
         use: (() => {
           const loaders = [
             {
-              loader: 'style-loader',
-            },
-            {
               loader: 'css-loader?modules',
               options: {
                 sourceMap: true,
@@ -110,7 +107,7 @@ module.exports = {
             });
           }
 
-          return loaders;
+          return [{ loader: 'style-loader' }].concat(loaders);
         })(),
       },
     ],
