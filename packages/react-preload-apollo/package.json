@@ -1,6 +1,6 @@
 {
   "name": "react-preload-apollo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Allows you to preload apollo graphql query components.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -44,7 +44,6 @@
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-resolve": "^3.0.0"
   },
-  "peerDependencies": {},
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/jest.setup.js"
   }
