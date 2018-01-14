@@ -1,6 +1,6 @@
 {
   "name": "react-router-preload",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Allows you to preload routes before transitioning.",
   "main": "lib/index.js",
   "module": "es/index.js",
