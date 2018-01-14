@@ -10,7 +10,7 @@ export function preloadRoute(
   location: Object | string,
   component: React$Element<any>,
   options: ?Object,
-) {
+): Promise<void> {
   const context = {};
   const element = (
     <StaticRouter location={location} context={context}>

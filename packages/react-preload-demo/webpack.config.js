@@ -81,12 +81,18 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          use: [
+        use: (() => {
+          const loaders = [
             {
-              loader: 'css-loader',
+              loader: 'style-loader',
+            },
+            {
+              loader: 'css-loader?modules',
               options: {
                 sourceMap: true,
+                modules: true,
+                importLoaders: 1,
+                localIdentName: '[local]-[hash:base64]',
               },
             },
             {
@@ -95,9 +101,17 @@ module.exports = {
                 sourceMap: true,
               },
             },
-          ],
-          fallback: 'style-loader',
-        }),
+          ];
+
+          if (env === 'production') {
+            return ExtractTextPlugin.extract({
+              use: loaders,
+              fallback: 'style-loader',
+            });
+          }
+
+          return loaders;
+        })(),
       },
     ],
   },

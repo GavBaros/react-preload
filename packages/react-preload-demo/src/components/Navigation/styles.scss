@@ -1,0 +1,16 @@
+.Navigation {
+  background: #000;
+  color: #FFF;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.Link {
+  display: inline-block;
+  color: #FFF;
+  text-decoration: none;
+  padding: 20px;
+  flex-grow: 1;
+  text-align: center;
+}

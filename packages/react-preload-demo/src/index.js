@@ -1,43 +1,34 @@
 import 'babel-polyfill';
 
+// Global styles.
 import './reset.scss';
 import './styles.scss';
 
 import ReactDOM from 'react-dom';
 import React, { Fragment } from 'react';
-import { Switch, Route } from 'react-router';
-import { HashRouter, Link } from 'react-router-dom';
+import { Route, Switch } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 import { makeAsyncRouter } from 'react-router-preload';
-import { withPreloading } from 'react-preload-core';
+import Home from './components/Home';
+import Slow from './components/Slow';
+import Navigation from './components/Navigation';
+import Throbber from './components/Throbber';
 
-const HomePage = () => 'Hello world!';
-const SyncPage = () => 'Sync page';
-const AsyncPageSlow = withPreloading(() => {
-  return new Promise(resolve => {
-    setTimeout(() => resolve(), 1000);
-  });
-})(() => 'Async slow');
-
-const AsyncPageVerySlow = withPreloading(() => {
-  return new Promise(resolve => {
-    setTimeout(() => resolve(), 3000);
-  });
-})(() => 'Async very slow');
-
-const AsyncRouter = makeAsyncRouter(HashRouter);
-
+const AsyncRouter = makeAsyncRouter(BrowserRouter);
 const App = () => (
-  <AsyncRouter>
+  <AsyncRouter
+    basename={
+      (process.env.NODE_ENV === 'production' && '/react-preload') || null
+    }
+  >
     <Fragment>
-      <Link to="/">Home</Link>
-      <Link to="/sync">Sync</Link>
-      <Link to="/async-slow">Async Slow</Link>
-      <Link to="/async-very-slow">Async Very Slow</Link>
+      <Throbber />
+
+      <Navigation />
+
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/sync" component={SyncPage} />
-        <Route path="/async-slow" component={AsyncPageSlow} />
-        <Route path="/async-very-slow" component={AsyncPageVerySlow} />
+        <Route exact path="/" component={Home} />
+        <Route path="/slow" component={Slow} />
       </Switch>
     </Fragment>
   </AsyncRouter>
