@@ -1,6 +1,6 @@
 {
   "name": "react-preload-apollo",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Allows you to preload apollo graphql query components.",
   "main": "lib/index.js",
   "module": "es/index.js",
